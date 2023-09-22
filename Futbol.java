@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Futbol{
     public static void main (String[]args){
@@ -41,7 +43,9 @@ public class Futbol{
                         int asistencias=sc.nextInt();
                         System.out.println("Ingrese los pases del extremo");
                         int pases=sc.nextInt();
-                        Extremo extremo=new Extremo(nombre,pais,edad,golesDirectos,totalLanzamientos,asistencias,pases);
+                        System.out.println("Ingrese las faltas del extremo");
+                        int faltas=sc.nextInt();
+                        Extremo extremo=new Extremo(nombre,pais,edad,golesDirectos,totalLanzamientos,asistencias,pases,faltas);
                         extremos.add(extremo);
                     }
                     break;
@@ -57,20 +61,49 @@ public class Futbol{
                     }
                     break;
                 case "3":
-                    System.out.println("Los 3 mejores porteros son");
-                    for (int i=0;i<porteros.size();i++){
-                        if (porteros.get(i).getGolesRecibidos()<5){
-                            System.out.println(porteros.get(i).toString());
+                    System.out.println("Los 3 mejores porteros son en base a su efectividad:");
+                    
+                    // Creamos una lista para almacenar a los porteros ordenados por efectividad
+                    ArrayList<Portero> porterosOrdenados = new ArrayList<>(porteros);
+
+                    // Ordenamos la lista de porteros en orden descendente de efectividad
+                    Collections.sort(porterosOrdenados, new Comparator<Portero>() {
+                        @Override
+                        public int compare(Portero p1, Portero p2) {
+                            // Comparamos los valores de efectividad en orden descendente
+                            return Double.compare(p2.efectividad(), p1.efectividad());
+                        }
+                    });
+
+                    // Mostramos los tres mejores porteros
+                    int contador = 0;
+                    for (Portero portero : porterosOrdenados) {
+                        if (contador < 3) {
+                            System.out.println(portero.toString());
+                            contador++;
+                        } else {
+                            break; // Mostramos solo los tres mejores
                         }
                     }
                     break;
+
+                case "4":
+                    System.out.println("Los extremos con 85% de efectividad son");
+                    for (int i=0;i<extremos.size();i++){
+                        if (extremos.get(i).efectividad()>=85){
+                            System.out.println(extremos.get(i).toString());
+                        }
+                    }
+                    break;
+
+                case "5":
+                    go=false;
+                    break;
             }
         }
-
-
     }
     public static void printMenu(){
-        System.out.println("\u001B[31m--------------------------------------------------");
+        System.out.println("\u001B[34m--------------------------------------------------");
         System.out.println("Bienvenido al programa de futbol");
         System.out.println("Seleccione una opcion");
         System.out.println("1. Agregar jugador");

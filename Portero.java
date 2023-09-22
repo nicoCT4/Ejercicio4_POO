@@ -16,12 +16,19 @@ public class Portero extends Jugador {
     public int getGolesRecibidos() {
         return golesRecibidos;
     }
+    //Efectividad
+    // ((paradas efectivas - goles recibidos) * 100 / (paradas efectivas + goles recibidos)) + golesdirectos * 100 / total de lanzamientos
+    public int efectividad(){
+        int efectividad=0;
+        efectividad=((paradas-golesRecibidos)*100/(paradas+golesRecibidos))+(golesDirectos*100/totalLanzamientos);
+        return efectividad;
+    }
 
     //toString
     @Override
     public String toString() {
         return "Portero [nombre=" + nombre + ", pais=" + pais + ", edad=" + edad + ", golesDirectos=" + golesDirectos
                 + ", totalLanzamientos=" + totalLanzamientos + ", paradas=" + paradas + ", golesRecibidos="
-                + golesRecibidos + "]";
+                + golesRecibidos + ", efectividad=" + efectividad() + "]";
     }
 }
