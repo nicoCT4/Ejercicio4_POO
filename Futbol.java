@@ -1,9 +1,21 @@
+//Universidad del valle de Guatemala
+//Carne:23197
+//Fecha: 22/09/2023
+//Herencia
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+/**
+ * Clase principal que simula mostrar datos estadisticos de jugadores de futbol
+ */
 public class Futbol{
+            /**
+     * Método principal que ejecuta la aplicación.
+     *
+     * @param args Los argumentos de línea de comandos 
+     */
     public static void main (String[]args){
         Scanner sc= new Scanner(System.in);
         boolean go=true;
@@ -50,6 +62,7 @@ public class Futbol{
                     }
                     break;
                 case "2":
+                    //Mostramos los jugadores tanto de portero como de extremo por separado
                     System.out.println("Jugadores extremos");
                     for (int i=0;i<extremos.size();i++){
                         System.out.println(extremos.get(i).toString());
@@ -61,6 +74,7 @@ public class Futbol{
                     }
                     break;
                 case "3":
+                    //Mostramos los tres mejores porteros en base a su efectividad
                     System.out.println("Los 3 mejores porteros son en base a su efectividad:");
                     
                     // Creamos una lista para almacenar a los porteros ordenados por efectividad
@@ -102,6 +116,9 @@ public class Futbol{
             }
         }
     }
+    /**
+     * Método que imprime el menú de opciones
+     */
     public static void printMenu(){
         System.out.println("\u001B[34m--------------------------------------------------");
         System.out.println("Bienvenido al programa de futbol");
